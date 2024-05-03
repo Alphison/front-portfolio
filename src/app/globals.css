@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'mont-reg';
+  src: url('/fonts/montserrat/Montserrat-Regular.ttf') format('ttf');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -26,8 +31,67 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+body::-webkit-scrollbar{
+  width: 5px;
+  background: rgb(131, 131, 131);
+}
+
+body::-webkit-scrollbar-thumb{
+  width: 5px;
+  background: rgb(211, 211, 211);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+.wrapper {
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.wrapper::-webkit-scrollbar{
+  display: none;
+}
+
+.section {
+  scroll-snap-align: start;
+}
+
+
+/* cursor_custom */
+
+#cursor, #aura{
+  position: absolute;
+  border-radius: 100%;
+  transition: .5s cubic-bezier(0.75, -1.27, .3, 2.33) transform, .2s cubic-bezier(0.75, -1.27, .3, 2.33) opacity;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1000;
+}
+#cursor{
+  width: 8px;
+  height: 8px;
+  background: #ffffff81;
+}
+
+#aura{
+  width: 46px;
+  height: 46px;
+  border: 1px solid #ffffffbd;
+  background: #ffffff31;
+  transform: translate(5px, 5px);
+}
+
+.hidden{
+  transform: scale(.0001);
+}
+
+body{
+  cursor: none;
+}
+
