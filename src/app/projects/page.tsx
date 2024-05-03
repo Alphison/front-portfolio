@@ -1,5 +1,3 @@
-"use client"
-
 import SliderProjects from '@/components/SliderProjects/SliderProjects'
 import ElFon from '../../components/ElFon/ElFon'
 import Link from 'next/link'

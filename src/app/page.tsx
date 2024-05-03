@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import ElFon from "../components/ElFon/ElFon";
 import SliderServices from "../components/SliderServices/SliderServices"
 import { useTranslation } from "react-i18next";
+import LoaderStart from "@/components/LoaderStart/LoaderStart";
 
 
 export default function Home() {
@@ -33,7 +34,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col wrapper overflow-hidden" ref={main}>
-      
+      {/* <LoaderStart /> */}
       <ElFon />
       <div className="flex flex-col gap-[14px] items-center fixed right-[50px] top-[50%] translate-y-[-50%] z-[99]">
         <h3 className="text-[20px]">01</h3>

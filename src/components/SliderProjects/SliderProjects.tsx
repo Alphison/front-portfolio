@@ -14,17 +14,23 @@ import { FreeMode, Pagination } from 'swiper/modules';
 
 import './style.css';
 
-import Image from "next/image";
-
-import src from "../../../public/assets/images/ванпис.jpeg"
 import ProjectBlock from "../ProjectBlock/ProjectBlock";
+import { Project } from "@/Types/Projects";
+import { Triangle } from "react-loader-spinner";
 
 export default function SliderProjects() {
 
     const {isPending, error, data} = useQuery({ queryKey: ['projects'], queryFn: () => ProjectsServies.getAll(), select: ({data}) => data.data })   
 
     if(isPending){
-        return 'Loading...'
+        return <Triangle
+        visible={true}
+        height="80"
+        width="80"
+        color="#FF2A5F"
+        ariaLabel="triangle-loading"
+        wrapperClass='m-auto my-[50px]'
+        />
     }
 
     if(error){
@@ -41,21 +47,18 @@ export default function SliderProjects() {
                 modules={[FreeMode, Pagination]}
                 className="mySwiper"
             >
-                <SwiperSlide>
-                    <ProjectBlock />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ProjectBlock />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ProjectBlock />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ProjectBlock />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <ProjectBlock />
-                </SwiperSlide>
+                {
+                    data ? 
+                        data.map((project: Project) => {
+                            return (
+                                <SwiperSlide>
+                                    <ProjectBlock project={project} key={project.id}/>
+                                </SwiperSlide>
+                            )
+                        })
+                    :
+                    'Проектов нет...'
+                }
 
             </Swiper>
         </div>

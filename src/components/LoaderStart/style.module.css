@@ -1,0 +1,32 @@
+.wrapper_loader{
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    animation: anim 1s forwards;
+}
+
+.active{
+    animation: anim2 1s forwards;
+}
+
+@keyframes anim {
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+@keyframes anim2 {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-100%);
+    }
+}
