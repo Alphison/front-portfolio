@@ -93,5 +93,7 @@ body::-webkit-scrollbar-thumb{
 
 body{
   cursor: none;
+  color: white !important;
+  background: black;
 }
 
