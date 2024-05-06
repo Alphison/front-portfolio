@@ -46,13 +46,27 @@ export default function SliderProjects() {
                 loop={true}
                 modules={[FreeMode, Pagination]}
                 className="mySwiper"
+                breakpoints={{
+                    320: {
+                        slidesPerView: 1
+                    },
+                    750: {
+                        slidesPerView: 2
+                    },
+                    1050: {
+                        slidesPerView: 3
+                    },
+                    1400: {
+                        slidesPerView: 4
+                    }
+                }}
             >
                 {
                     data ? 
                         data.map((project: Project) => {
                             return (
                                 <SwiperSlide>
-                                    <ProjectBlock project={project} key={project.id}/>
+                                    <ProjectBlock project={project} height={284} key={project.id}/>
                                 </SwiperSlide>
                             )
                         })

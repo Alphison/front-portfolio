@@ -5,12 +5,12 @@ import Link from 'next/link'
 export default function Page() {
 
     return (
-        <>
+        <div id="page-wrap">
             <ElFon />
             <main className='flex flex-col m-[auto] sticky z-1'>
-                <h1 className='mt-[200px] text-[113px] font-bold text-center font-mono'>НАШИ ПРОЕКТЫ</h1>
+                <h1 className='mt-[200px] text-[40px] sm:text-[60px] lx:text-[113px] font-bold text-center font-mono '>НАШИ ПРОЕКТЫ</h1>
                 <hr className='w-[100px] h-[5px] bg-white mt-[30px] rounded-full m-[auto]'/>
-                <p className='text-center m-auto mt-[30px] w-[25%] font-mono'>Доверьте нам разработку вашего следующего проекта и убедитесь сами в качестве нашей работы.</p>
+                <p className='text-center m-auto mt-[30px] w-[85%] mi:w-[65%] sm:w-[45%] lx:w-[25%] font-mono'>Доверьте нам разработку вашего следующего проекта и убедитесь сами в качестве нашей работы.</p>
 
                 <SliderProjects />
 
@@ -18,7 +18,7 @@ export default function Page() {
                     <span className="text-[20px] relative z-10 font-mono">ПОДРОБНЕЕ</span>
                 </Link>
             </main>
-        </>
+        </div>
     )
 }
 

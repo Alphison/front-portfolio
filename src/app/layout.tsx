@@ -5,6 +5,7 @@ import Header from "../components/Header/Header"
 import Cursor from "../components/Cursor/Cursor";
 import { Tanstack } from "@/providers/tanstack";
 import Translate from "@/providers/translate";
+import BurgerMenu from "@/components/Menu/Menu";
 
 const syncopate = Syncopate({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-syncopate'});
 const montserrat = Montserrat({ weight: ['400', '700'], subsets: ['latin'], variable: '--font-montserrat'});
@@ -18,10 +19,11 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className={`${syncopate.variable} ${montserrat.variable} font-sans`}>
+      <body className={`${syncopate.variable} ${montserrat.variable} font-sans`} id="outer-container">
         <Tanstack>
             <Cursor />
             <Header />
+            <BurgerMenu />
             {children}
         </Tanstack>
       </body>

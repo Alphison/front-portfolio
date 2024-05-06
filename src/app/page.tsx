@@ -33,7 +33,7 @@ export default function Home() {
 
 
   return (
-    <main className="flex flex-col wrapper overflow-hidden" ref={main}>
+    <main className="flex flex-col wrapper overflow-hidden" ref={main} id="page-wrap">
       {/* <LoaderStart /> */}
       <ElFon />
       <div className="flex flex-col gap-[14px] items-center fixed right-[50px] top-[50%] translate-y-[-50%] z-[99]">
@@ -70,7 +70,7 @@ export default function Home() {
         <motion.h1 initial={{ opacity: 0, x: -100, filter: 'blur(100px)' }} whileInView={{ opacity: 1, x: 0, filter: 'blur(0)' }} transition={{duration: 0.3, ease: 'easeIn'}} className="text-[30px] sm:text-[50px] font-bold md:text-[100px]">Our Approach</motion.h1>
         <motion.hr initial={{ opacity: 0, x: -100, filter: 'blur(100px)' }} whileInView={{ opacity: 1, x: 0, filter: 'blur(0)' }} transition={{duration: 0.3, delay: 0.3, ease: 'easeIn'}} className="rounded-full w-[100px] h-[5px] bg-white mt-[30px]"/>
         <motion.p initial={{ opacity: 0, x: -100, filter: 'blur(100px)' }} whileInView={{ opacity: 1, x: 0, filter: 'blur(0)' }} transition={{duration: 0.3, delay: 0.6, ease: 'easeIn'}} className="text-[10px] md:text-[18px] w-[100%] lx:w-[1050px] mt-[50px] mb-[50px] font-mono">We strive for quality and uniqueness, reflecting your individuality and  effectively showcasing your brand online. Our approach is based on  careful analysis of your business and target audience to create web  solutions that meet your needs and expectations.</motion.p>
-        <motion.button initial={{ opacity: 0, x: -200, filter: 'blur(100px)' }} whileInView={{ opacity: 1, x: 0, filter: 'blur(0)' }} transition={{duration: 0.3, delay: 0.9, ease: 'easeIn'}} className="cursor-none rounded-[4px] pt-4 pb-4 pr-[25px] pl-[25px] md:pt-7 md:pb-7 md:pr-[50px] md:pl-[50px] relative overflow-hidden border shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-[#FF2A5F] before:duration-300 before:ease-out hover:text-white hover:shadow-[#FF2A5F] hover:before:h-40 hover:before:w-[100%] hover:before:opacity-80">
+        <motion.button onClick={() => handlePush()} initial={{ opacity: 0, x: -200, filter: 'blur(100px)' }} whileInView={{ opacity: 1, x: 0, filter: 'blur(0)' }} transition={{duration: 0.3, delay: 0.9, ease: 'easeIn'}} className="cursor-none rounded-[4px] pt-4 pb-4 pr-[25px] pl-[25px] md:pt-7 md:pb-7 md:pr-[50px] md:pl-[50px] relative overflow-hidden border shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-[#FF2A5F] before:duration-300 before:ease-out hover:text-white hover:shadow-[#FF2A5F] hover:before:h-40 hover:before:w-[100%] hover:before:opacity-80">
           <span className="text-[12px] md:text-[20px] relative z-10">our projects</span>
         </motion.button>
       </div>

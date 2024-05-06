@@ -2,17 +2,17 @@ import { Project } from "@/Types/Projects";
 import Image from "next/image";
 
 
-export default function ProjectBlock({project}: {project: Project}){   
+export default function ProjectBlock({project, height}: {project: Project, height: number}){   
 
     return (
         <div>
-            <div className="h-[284px] w-[100%]">
-                <Image loader={() => project.preview_path} src={project.preview_path} className="rounded-[7px] w-[100%] h-[100%]" alt="" width={500} height={284}/>
+            <div className="w-[100%]" style={{height}}>
+                <Image loader={() => project.preview_path} unoptimized src={project.preview_path} className="rounded-[7px] w-[100%] h-[100%]" alt="" width={500} height={height}/>
             </div>
-            <div className="mt-[30px] w-[100%] flex justify-between items-center">
+            <div className="mt-[30px] w-[100%] flex flex-col mi:flex-row gap-3 items-start mi:items-center justify-between">
                 <h1 className="text-[24px] font-bold font-mono">{project.name}</h1>
                 <div className="border pt-[10px] pb-[10px] pr-[20px] pl-[20px] rounded-[2px]">
-                    <p className="text-[18px] font-bold font-mono">{project.category.name}</p>
+                    <p className="text-[18px] font-bold font-mono">{project.service.category.name}</p>
                 </div>
             </div>
             <hr className="mt-[30px]"/>
