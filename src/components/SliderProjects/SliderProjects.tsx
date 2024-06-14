@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-import { FreeMode, Pagination } from 'swiper/modules';
+import { Autoplay, FreeMode, Pagination } from 'swiper/modules';
 
 import './style.css';
 
@@ -20,7 +20,7 @@ import { Triangle } from "react-loader-spinner";
 
 export default function SliderProjects() {
 
-    const {isPending, error, data} = useQuery({ queryKey: ['projects'], queryFn: () => ProjectsServies.getAll(), select: ({data}) => data.data })   
+    const {isPending, error, data} = useQuery({ queryKey: ['projects'], queryFn: () => ProjectsServies.getAll(), select: ({data}) => data })   
 
     if(isPending){
         return <Triangle
@@ -42,9 +42,13 @@ export default function SliderProjects() {
             <Swiper
                 slidesPerView={4}
                 spaceBetween={42}
-                freeMode={true}
+                freeMode={false}
                 loop={true}
-                modules={[FreeMode, Pagination]}
+                autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                  }}
+                modules={[Autoplay, FreeMode, Pagination]}
                 className="mySwiper"
                 breakpoints={{
                     320: {

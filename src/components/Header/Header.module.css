@@ -6,7 +6,13 @@
     padding: 0 50px;
     padding-top: 43px;
     position: fixed;
+    top: 0;
     z-index: 50;
+    transition: 0.3s;
+}
+
+.active{
+    top: -100px;
 }
 .lang{
     border: 2px solid white;

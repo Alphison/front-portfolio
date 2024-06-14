@@ -1,6 +1,6 @@
-export type Image = {
+export interface ITechnology {
     id: number;
     name: string;
-    description: string;
+    description?: string;
     image_path: string;
 }

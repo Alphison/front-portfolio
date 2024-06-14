@@ -92,8 +92,12 @@ body::-webkit-scrollbar-thumb{
 }
 
 body{
-  cursor: none;
+  /* cursor: none; */
   color: white !important;
   background: black;
+}
+
+#react-burger-menu-btn{
+  display: none !important;
 }
 

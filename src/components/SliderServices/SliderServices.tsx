@@ -16,7 +16,7 @@ import { Service } from '@/Types/Services'
 
 export default function SliderServices(){
 
-    const {isPending, error, data} = useQuery({queryKey: ['services'], queryFn: () => ServicesService.getAll(), select: ({data}) => data.data})
+    const {isPending, error, data} = useQuery({queryKey: ['services'], queryFn: () => ServicesService.getAll(), select: ({data}) => data})
 
     if(isPending){
         return 'Loading...'

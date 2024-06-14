@@ -1,12 +1,15 @@
 
 import { Category } from "./Categories";
-import { Image } from "./Images";
+import { IImage } from "./Images";
 import { Service } from "./Services";
+import { ITechnology } from "./Technology";
 
 
 export type Project = {
     id: number;
     name: string;
+    link_to_project: string;
+    link_to_site: string;    
     description: string;
     preview_path: string;
     price: number;
@@ -14,9 +17,6 @@ export type Project = {
     service: Service;
     visibility: number;
     completed_at: string;
-    images: Image[];
-}
-
-export interface IProjects {
-    data: Project[];
+    images: IImage[];
+    technologies: ITechnology[];
 }

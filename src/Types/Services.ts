@@ -10,6 +10,3 @@ export type Service = {
     category: Category
 }
 
-export interface Services {
-    data: Service[];
-}

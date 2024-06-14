@@ -7,10 +7,66 @@ import { Triangle } from "react-loader-spinner"
 import { useQuery } from "@tanstack/react-query"
 import { ProjectsServies } from "@/services/Projects.services"
 import { Project } from "@/Types/Projects"
+import { useRouter } from "next/navigation"
+import { motion } from "framer-motion"
+import { ITechnology } from "@/Types/Technology"
+import { CategporiesServies } from "@/services/Categories.services"
+import { TechnologiesServies } from "@/services/Technologies.services"
+import { ServicesService } from "@/services/Services.services"
+import { useEffect, useMemo, useState } from "react"
+import { formatDate } from "@/utils/formatdate"
+
+const animCard = {
+    hidden: {
+       opacity: 0,
+       scale: 0 
+    },
+    visible: (i:number) => ({
+      opacity: 1,
+      transition: {
+        delay: i * 0.4,
+      },
+      scale: 1
+    }),
+  }
 
 export default function CatalogProjects() {
 
-    const {isPending, error, data} = useQuery({ queryKey: ['projects'], queryFn: () => ProjectsServies.getAll(), select: ({data}) => data.data })   
+    const router = useRouter()
+
+    const [technoId, setTechnoId] = useState(0)
+    const [serviceId, setServiceId] = useState(0)
+    const [projects, setProjects] = useState<Project[]>([])
+
+    const {isPending, error, data} = useQuery({ queryKey: ['projects'], queryFn: () => ProjectsServies.getAll(), select: ({data}) => data })   
+    // const {data:categories} = useQuery({ queryKey: ['categories'], queryFn: () => CategporiesServies.getAll(), select: ({data}) => data })   
+    const {data:technologies} = useQuery({ queryKey: ['technologies'], queryFn: () => TechnologiesServies.getAll(), select: ({data}) => data })   
+    const {data:services} = useQuery({ queryKey: ['services'], queryFn: () => ServicesService.getAll(), select: ({data}) => data })   
+
+    const optionsTechno = technologies?.map(item => ({value: item.id, label: item.name}))
+    const optionsServices = services?.map(item => ({value: item.id, label: item.name}))
+    
+    const sortedPosts = useMemo(() => {
+
+        if(serviceId){            
+            return [...projects].filter(item => item.service.id === serviceId)
+        }
+        
+        return projects
+
+    }, [serviceId, projects ])
+
+    useEffect(() => {
+        data && setProjects(data)
+    }, [data])    
+
+    const handleChangeTechno = (selectedOption: {value: number, label: string}) => {        
+        setTechnoId(selectedOption.value)        
+    }
+
+    const handleChangeService = (selectedOption: {value: number, label: string}) => {
+        setServiceId(selectedOption.value)
+    }   
 
     if(isPending){
         return <Triangle
@@ -25,57 +81,52 @@ export default function CatalogProjects() {
 
     if(error){
         return 'Пиздец такая ошибка: ' + error.message
-    }
-
-    const formatDate = (inputDate:string) => {
-        const date = new Date(inputDate);
-
-        return date.toLocaleDateString('ru', { year: 'numeric', month: 'numeric', day: 'numeric' });
-    }
+    }    
 
     return (
         <div>
             <div className="flex justify-center mt-[50px] gap-[30px]">
-                {/* <select name="catgory" id="" className="bg-transparent pt-[30px] pb-[30px] pl-[50px] pr-[50px] border outline-none font-bold rounded-[4px]">
-                    <option value="" selected>КАТЕГОРИЯ</option>
-                </select>
-                <select name="" id="" className="bg-transparent pt-[30px] pb-[30px] pl-[50px] pr-[50px] border outline-none font-bold rounded-[4px]">
-                    <option value="" selected>ТЕХНОЛОГИИ</option>
-                </select>
-                <select name="" id="" className="bg-transparent pt-[30px] pb-[30px] pl-[50px] pr-[50px] border outline-none font-bold rounded-[4px]">
-                    <option value="" selected>УСЛУГИ</option>
-                </select> */}
-                {/* <Select />
-                <Select />
-                <Select /> */}
+                {/* <Select placeholder="КАТЕГОРИЯ"/> */}
+                {
+                    optionsTechno && (
+                        <Select placeholder="ТЕХНОЛОГИЯ" options={optionsTechno} handleChange={handleChangeTechno}/>
+                    )
+                }
+                {
+                    optionsServices && (
+                        <Select placeholder="УСЛУГА" options={optionsServices} handleChange={handleChangeService}/>
+                    )
+                }
             </div>
             <div className="flex justify-center 3xl:justify-start w-[100%] 3xl:w-[1700px] px-[20px] 3xl:mx-[auto] mt-[70px] flex-wrap gap-[55px] mb-[50px]">
                 {
-                    data ? 
-                        data.map((project: Project) => {
+                    sortedPosts.length ? 
+                    sortedPosts.map((project: Project) => {
                             return (
-                                <div className="flex flex-col gap-[20px] w-[515px]" key={project.id}>
-                                    <ProjectBlock project={project} height={355}/>
+                                <motion.div variants={animCard} custom={project.id} initial="hidden" animate="visible"  className="flex flex-col gap-[20px] w-[515px]" key={project.id}>
+                                    <div onClick={() => router.push(`/projects/${project.id}`)} className="cursor-pointer">
+                                        <ProjectBlock project={project} height={355} />
+                                    </div>
                                     <p className="font-mono">
                                         {project.description}
                                     </p>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-[15px]">
-                                            <div className="w-[45px] h-[45px] rounded-full border flex justify-center items-center bg-black bg-opacity-50">
-                                                <Image src={'/assets/images/icon_laravel.png'} width={25} height={25} alt=""/>
-                                            </div>
-                                            <div className="w-[45px] h-[45px] rounded-full border flex justify-center items-center bg-black bg-opacity-50">
-                                                <Image src={'/assets/images/icon_laravel.png'} width={25} height={25} alt=""/>
-                                            </div>
-                                            <div className="w-[45px] h-[45px] rounded-full border flex justify-center items-center bg-black bg-opacity-50">
-                                                <Image src={'/assets/images/icon_laravel.png'} width={25} height={25} alt=""/>
-                                            </div>
+                                            {
+                                                project.technologies?.map((techno:ITechnology) => {
+                                                    return (
+                                                        <div className="w-[45px] h-[45px] rounded-full border flex justify-center items-center bg-black bg-opacity-50" key={techno.id}>
+                                                            <Image loader={() => techno.image_path} unoptimized src={techno.image_path} width={25} height={25} alt=""/>
+                                                        </div>
+                                                    )                                                    
+                                                })
+                                            }
                                         </div>
                                         <p className="font-mono">
                                             {formatDate(project.completed_at)}
                                         </p>
                                     </div>
-                                </div>     
+                                </motion.div>     
                             )
                         })
                     :
