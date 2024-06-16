@@ -48,7 +48,7 @@ export default function Home() {
         <motion.h1 initial={{ scale: 0, y: -1000, filter: "blur(100px)" }} animate={{ scale: 1, y: 0, filter: "blur(0)" }} transition={{ duration: 2 }}  className="mob:text-[50px] md:text-[100px] text-[30px] font-bold leading-[100vh] sticky z-1">EXPLORE</motion.h1>
       </div>
 
-      <div className="min-h-screen text-center flex flex-col items-center justify-center sticky z-1 section">
+      <div className="min-h-screen text-center flex flex-col items-center justify-center sticky z-1 section" id="about">
         <motion.h1 initial={{ opacity: 0, scale: 0, filter: "blur(100px)" }} whileInView={{ opacity: 1, scale: [null, 1.1, 1], filter: "blur(0px)" }} transition={{ duration: 0.5, type: "tween", ease: 'easeInOut' }} className="text-[40px] sm:text-[50px] font-bold md:text-[100px]">ABOUT US</motion.h1>
         <motion.hr initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.5, ease: 'easeInOut' }} className="w-[100px] h-[5px] bg-white mt-[30px] rounded-full"/>
         <motion.p initial={{ opacity: 0, scale: 3, filter: "blur(100px)" }} whileInView={{ opacity: 1, scale: [null, 1.1, 1], filter: "blur(0px)" }} transition={{ duration: 0.5, delay: 0.5, ease: 'easeInOut' }} className="text-[10px] md:text-[18px] w-[100%] m-[50px] lx:w-[1050px] pl-[10px] pr-[10px] font-mono">We are a team of professional web developers from the A&A (Azat and  Alfis) studio, specializing in creating high-quality websites and web  applications. Our goal is to help your business succeed in the online  world by providing modern and innovative solutions for your web  presence.</motion.p>

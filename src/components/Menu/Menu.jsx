@@ -14,15 +14,15 @@ const BurgerMenu = () => {
   return (
     <Menu left isOpen={ status } onClose={() => updateStatus()} pageWrapId={"page-wrap"} outerContainerId={'outer-container'}>
       {/* <Cursor /> */}
-      <div className="bg-black p-5 flex-col gap-5 h-full" style={{display: 'flex'}}>        
-        <Link id="home" className="menu-item" href="/">
-          Home
+      <div className="bg-black p-5 flex-col gap-5 h-full font-mono" style={{display: 'flex'}}>        
+        <Link className="menu-item" href="/">
+          Главная
         </Link>
-        <Link id="about" className="menu-item" href="/about">
-          About
+        <Link className="menu-item" href="/projects">
+          Проекты
         </Link>
-        <Link id="contact" className="menu-item" href="/contact">
-          Contact
+        <Link className="menu-item" href="#about">
+          О нас
         </Link>
       </div>
     </Menu>

@@ -24,6 +24,7 @@ const config: Config = {
       'mi': '450px',
       'sm': '640px',
       'md': '768px',
+      '1000': '1000px',
       'lg': '1024px',
       'lx': '1050px',
       'xl': '1280px',

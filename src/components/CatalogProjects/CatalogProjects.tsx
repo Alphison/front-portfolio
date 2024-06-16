@@ -104,7 +104,7 @@ export default function CatalogProjects() {
                     sortedPosts.map((project: Project) => {
                             return (
                                 <motion.div variants={animCard} custom={project.id} initial="hidden" animate="visible"  className="flex flex-col gap-[20px] w-[515px]" key={project.id}>
-                                    <div onClick={() => router.push(`/projects/${project.id}`)} className="cursor-pointer">
+                                    <div className="cursor-pointer">
                                         <ProjectBlock project={project} height={355} />
                                     </div>
                                     <p className="font-mono">
