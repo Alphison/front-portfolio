@@ -35,26 +35,33 @@ export default function CatalogProjects() {
     const router = useRouter()
 
     const [technoId, setTechnoId] = useState(0)
+    const [catId, setCatId] = useState(0)
     const [serviceId, setServiceId] = useState(0)
+    const [sortedPosts, setSortedPosts] = useState<Project[]>([])
     const [projects, setProjects] = useState<Project[]>([])
 
     const {isPending, error, data} = useQuery({ queryKey: ['projects'], queryFn: () => ProjectsServies.getAll(), select: ({data}) => data })   
-    // const {data:categories} = useQuery({ queryKey: ['categories'], queryFn: () => CategporiesServies.getAll(), select: ({data}) => data })   
+    const {data:categories} = useQuery({ queryKey: ['categories'], queryFn: () => CategporiesServies.getAll(), select: ({data}) => data })   
     const {data:technologies} = useQuery({ queryKey: ['technologies'], queryFn: () => TechnologiesServies.getAll(), select: ({data}) => data })   
     const {data:services} = useQuery({ queryKey: ['services'], queryFn: () => ServicesService.getAll(), select: ({data}) => data })   
 
     const optionsTechno = technologies?.map(item => ({value: item.id, label: item.name}))
     const optionsServices = services?.map(item => ({value: item.id, label: item.name}))
+    const optionsCategories = categories?.map(item => ({value: item.id, label: item.name}))
     
-    const sortedPosts = useMemo(() => {
+    useMemo(() => {
 
-        if(serviceId){            
-            return [...projects].filter(item => item.service.id === serviceId)
+        if(technoId || catId || serviceId){            
+            let newProjects = [...projects].filter(item => item.technologies.find(techno => techno.id === technoId) || item.category.id === catId || item.service.id === serviceId)
+           
+            setSortedPosts(newProjects)
+
+            return false
         }
         
-        return projects
+        setSortedPosts(projects)        
 
-    }, [serviceId, projects ])
+    }, [serviceId, technoId, catId, projects ])
 
     useEffect(() => {
         data && setProjects(data)
@@ -66,6 +73,10 @@ export default function CatalogProjects() {
 
     const handleChangeService = (selectedOption: {value: number, label: string}) => {
         setServiceId(selectedOption.value)
+    }   
+
+    const handleChangeCat = (selectedOption: {value: number, label: string}) => {
+        setCatId(selectedOption.value)
     }   
 
     if(isPending){
@@ -80,21 +91,25 @@ export default function CatalogProjects() {
     }
 
     if(error){
-        return 'Пиздец такая ошибка: ' + error.message
+        return 'Пиздец ошибка: ' + error.message
     }    
 
     return (
         <div>
-            <div className="flex justify-center mt-[50px] gap-[30px]">
-                {/* <Select placeholder="КАТЕГОРИЯ"/> */}
+            <div className="flex flex-wrap mx-[20px] justify-center mt-[50px] gap-[30px]">
+                {
+                    optionsCategories && (
+                        <Select placeholder="КАТЕГОРИИ" options={optionsCategories} handleChange={handleChangeCat}/>
+                    )
+                }
                 {
                     optionsTechno && (
-                        <Select placeholder="ТЕХНОЛОГИЯ" options={optionsTechno} handleChange={handleChangeTechno}/>
+                        <Select placeholder="ТЕХНОЛОГИИ" options={optionsTechno} handleChange={handleChangeTechno}/>
                     )
                 }
                 {
                     optionsServices && (
-                        <Select placeholder="УСЛУГА" options={optionsServices} handleChange={handleChangeService}/>
+                        <Select placeholder="УСЛУГИ" options={optionsServices} handleChange={handleChangeService}/>
                     )
                 }
             </div>
