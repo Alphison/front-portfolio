@@ -69,7 +69,7 @@ export default function SliderProjects() {
                     data ? 
                         data.map((project: Project) => {
                             return (
-                                <SwiperSlide>
+                                <SwiperSlide key={project.id}>
                                     <ProjectBlock project={project} height={284} key={project.id}/>
                                 </SwiperSlide>
                             )

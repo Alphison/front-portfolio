@@ -8,12 +8,13 @@ export default function Cursor(): JSX.Element {
     const cursor = useRef<HTMLDivElement>(null)
     const follower = useRef<HTMLDivElement>(null)
 
-    let mouseX = 0
-    let mouseY = 0
-    let posX = 0
-    let posY = 0
 
     useEffect(() => {
+
+        let mouseX = 0
+        let mouseY = 0
+        let posX = 0
+        let posY = 0
 
         if(cursor.current && follower.current) {
             cursor.current.classList.add('hidden')

@@ -21,7 +21,7 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
     <html lang="en">
       <body className={`${syncopate.variable} ${montserrat.variable} font-sans`} id="outer-container">
         <Tanstack>
-            {/* <Cursor /> */}
+            <Cursor />
             <Header />
             <BurgerMenu />
             {children}
