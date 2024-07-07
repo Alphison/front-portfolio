@@ -94,6 +94,9 @@ export default function CatalogProjects() {
         return 'Пиздец ошибка: ' + error.message
     }    
 
+    console.log(sortedPosts);
+    
+
     return (
         <div>
             <div className="flex flex-wrap mx-[20px] justify-center mt-[50px] gap-[30px]">
@@ -123,7 +126,7 @@ export default function CatalogProjects() {
                                         <ProjectBlock project={project} height={355} />
                                     </div>
                                     <p className="font-mono">
-                                        {project.description}
+                                        {project.short_description}
                                     </p>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-[15px]">

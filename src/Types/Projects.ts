@@ -11,6 +11,7 @@ export type Project = {
     link_to_project: string;
     link_to_site: string;    
     description: string;
+    short_description: string;  
     preview_path: string;
     price: number;
     category: Category;
